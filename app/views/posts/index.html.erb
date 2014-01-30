@@ -1,0 +1,71 @@
+    <div class="static1">
+      <div class="head">
+        <div class="container">
+        <h1>ODC Navigator News</h1>
+        <ul class="navlist">
+        <% if signed_in? %>
+          <li><%= link_to 'New Post', new_post_path %></li>
+          <li><%= link_to 'Logout', logout_path %></li>
+        <% end %>
+        <ul>
+      </div>
+      </div>
+      <div class="image">
+      <div class="container">
+
+        <% if @image_month %>
+          <%= image_tag @image_month.image.url %>
+        <% else %>
+          <%= image_tag 'default.jpg' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+    <div class="blog-content">
+    <div class="container">
+      <div class="row">
+      <div class="col-lg-10 col-sm-10">
+        <% @posts.each do |post| %>
+        <div class="post">
+          <div class="title">
+            <%= post.title %>
+          </div>
+          <div class="date">
+            <%= post.created_at.strftime("%d %B %Y") %>
+          </div>
+          <hr></hr>
+          <div class="content">
+            <%= post.content %>
+          </div>
+          <div class="edit">
+            <% if signed_in? %>
+              <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-primary btn-sm' %>
+              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'%>
+            <% end %>
+          </div> 
+        </div>
+          <br>
+        <% end %>
+        <% if signed_in? %>
+          <div>
+            <%= form_tag '/image', multipart: true do %>
+              <%= select_tag 'month', options_for_select(@posts_months.keys) %>          
+              <label for="file">File to Upload</label> <%= file_field_tag "image" %>
+              <%= submit_tag %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-lg-2 col-sm-2" >
+        <div style="text-align:center" id="archive">ARCHIVES</div>
+        <% for key in @posts_months.keys do %>
+        <div class="months">
+        <%= link_to key, posts_path(:month => key)%>
+      </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+
+

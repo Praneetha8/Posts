@@ -1,0 +1,33 @@
+<div class="login">
+ <div class="container">
+ 	<div class="row">
+ 		<div class="col-sm-offset-3 col-sm-9">
+<p style="color:rgb(66,139,202)"><b> Please login!</b></p>
+ <%= form_tag do%>
+  <div class="row">
+  	<div class="col-sm-3">
+  <%= label_tag :Name %>
+   </div>
+   <div class="col-sm-9">
+  <%= text_field(:user, :name)%>
+  </div>
+</div>
+<div class="row">
+	<div class="col-sm-3">
+  <%= label_tag :Password %>
+</div>
+<div class="col-sm-9">
+  <%= text_field(:user, :password) %>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-offset-3 col-sm-9">
+  <%= submit_tag 'Login' , class: 'btn btn-primary btn-sm' %>
+</div>
+</div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>
